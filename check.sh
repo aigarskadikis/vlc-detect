@@ -228,7 +228,7 @@ extra line
 EOF
 )
 
-wget -S --spider -o $tmp/output.log "$base"
+wget -S --spider -o $tmp/output.log "$base/"
 
 grep -A99 "^Resolving" $tmp/output.log | grep "HTTP.*200 OK"
 if [ $? -eq 0 ]; then
