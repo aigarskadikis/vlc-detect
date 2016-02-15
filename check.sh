@@ -219,6 +219,7 @@ if [ ! -f "/home/pi/client_secrets.json" ]
 		fi
 fi
 
+name=$(echo "VLC Media Player")
 base=$(echo "https://get.videolan.org/vlc/last")
 
 architectures=$(cat <<EOF
@@ -280,6 +281,26 @@ echo Make sure you have created \"$appname\" directory inside it!
 echo
 fi
 
+case "$architecture" in
+win32)
+bit=$(echo "32-bit")
+;;
+win64)
+bit=$(echo "64-bit")
+;;
+esac
+
+#lets send emails to all people in "posting" file
+emails=$(cat ../posting | sed '$aend of file')
+printf %s "$emails" | while IFS= read -r onemail
+do {
+python ../send-email.py "$onemail" "$name $version $bit" "$url 
+https://4e7299a03ac49455dce684f7851a9aa3b33044ee.googledrive.com/host/0B_3uBwg3RcdVMFVpME1MdThxZ1U/$filename 
+$md5
+$sha1"
+} done
+echo
+
 else
 #version do not match version pattern
 echo version do not match version pattern
@@ -310,6 +331,8 @@ $base"
 echo 
 echo
 fi
+
+
 
 #clean and remove whole temp direcotry
 rm $tmp -rf > /dev/null
