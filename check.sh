@@ -283,10 +283,10 @@ fi
 
 case "$architecture" in
 win32)
-bit=$(echo "32-bit")
+bit=$(echo "(32-bit)")
 ;;
 win64)
-bit=$(echo "64-bit")
+bit=$(echo "(64-bit)")
 ;;
 esac
 
